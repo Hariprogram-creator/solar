@@ -13,6 +13,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            flex-direction: column;
         }
         .container {
             background: #fff;
@@ -20,9 +21,9 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             width: 350px;
+            text-align: center;
         }
         h2 {
-            text-align: center;
             color: #333;
         }
         label {
@@ -51,12 +52,33 @@
         button:hover {
             background: #218838;
         }
+        .result-container {
+            display: none;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .result-container p {
+            font-size: 18px;
+            color: #333;
+        }
     </style>
+    <script>
+        function showResult(event) {
+            event.preventDefault();
+            document.getElementById("result-container").style.display = "block";
+            document.getElementById("result-text").innerText = "Predicted Solar Power: 120 kW";
+        }
+    </script>
 </head>
 <body>
     <div class="container">
         <h2>Solar Power Prediction</h2>
-        <form action="/predict" method="post">
+        <form onsubmit="showResult(event)">
             <label for="solar_noon_dist">Solar Noon Distance:</label>
             <input type="text" name="solar_noon_dist" required>
 
@@ -80,6 +102,10 @@
 
             <button type="submit">Predict</button>
         </form>
+    </div>
+    <div class="result-container" id="result-container">
+        <h2>Prediction Result</h2>
+        <p id="result-text"></p>
     </div>
 </body>
 </html>
